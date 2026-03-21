@@ -49,6 +49,8 @@ export default function App() {
     setAchievement(msg);
   }, []);
 
+  const dismissAchievement = useCallback(() => setAchievement(null), []);
+
   if (loading) {
     return <LoadingScreen onComplete={() => setLoading(false)} />;
   }
@@ -146,7 +148,7 @@ export default function App() {
       {achievement && (
         <AchievementPopup
           message={achievement}
-          onDismiss={() => setAchievement(null)}
+          onDismiss={dismissAchievement}
         />
       )}
 

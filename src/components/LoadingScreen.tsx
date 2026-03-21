@@ -14,6 +14,14 @@ const BOOT_LINES = [
   'Initializing Jellycat Physics...',
 ];
 
+const SPARKLE_POSITIONS = Array.from({ length: 12 }).map(() => ({
+  top: `${Math.random() * 100}%`,
+  left: `${Math.random() * 100}%`,
+  animationDelay: `${Math.random() * 5}s`,
+  animationDuration: `${4 + Math.random() * 4}s`,
+  fontSize: `${12 + Math.random() * 20}px`,
+}));
+
 export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
   const [progress, setProgress] = useState(0);
   const [currentLine, setCurrentLine] = useState(0);
@@ -57,16 +65,12 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
     >
       {/* Floating sparkles background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {Array.from({ length: 12 }).map((_, i) => (
+        {SPARKLE_POSITIONS.map((pos, i) => (
           <div
             key={i}
             className="absolute animate-float-slow text-pink-200"
             style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${4 + Math.random() * 4}s`,
-              fontSize: `${12 + Math.random() * 20}px`,
+              ...pos,
               opacity: 0.4,
             }}
           >

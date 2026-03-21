@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Trophy } from 'lucide-react';
 import { playAchievement } from '../hooks/useSound';
 
@@ -9,6 +9,9 @@ interface AchievementPopupProps {
 
 export default function AchievementPopup({ message, onDismiss }: AchievementPopupProps) {
   const [visible, setVisible] = useState(false);
+  const innerTimerRef = useRef<number>();
+  const onDismissRef = useRef(onDismiss);
+  onDismissRef.current = onDismiss;
 
   useEffect(() => {
     // Slide in
@@ -18,11 +21,14 @@ export default function AchievementPopup({ message, onDismiss }: AchievementPopu
     // Auto dismiss after 3s
     const timer = setTimeout(() => {
       setVisible(false);
-      setTimeout(onDismiss, 500);
+      innerTimerRef.current = window.setTimeout(() => onDismissRef.current(), 500);
     }, 3000);
 
-    return () => clearTimeout(timer);
-  }, [onDismiss]);
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(innerTimerRef.current);
+    };
+  }, [message]);
 
   return (
     <div
