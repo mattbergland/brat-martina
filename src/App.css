@@ -144,6 +144,23 @@
   background: linear-gradient(180deg, #bb2255, #993355);
 }
 
+/* ─── LINK STYLING ─── */
+.hp-link {
+  color: #cc3366;
+  font-size: 10px;
+  font-weight: bold;
+  font-family: 'Verdana', sans-serif;
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.hp-link:hover {
+  color: #ff6699;
+}
+
 /* ─── SPONSOR / SUPPORT BARS ─── */
 .hp-sponsor-bar {
   background: rgba(255, 255, 255, 0.75);
