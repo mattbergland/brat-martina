@@ -35,6 +35,8 @@ export default function App() {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (loading) return;
+      const tag = (e.target as HTMLElement)?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
       if (e.key === 'ArrowRight') {
         switchBlade(Math.min(activeBlade + 1, BLADES.length - 1));
       } else if (e.key === 'ArrowLeft') {
